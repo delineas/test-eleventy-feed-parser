@@ -6,9 +6,17 @@ eleventyNavigation:
 ---
 
 <h1>Latest 3 Posts</h1>
+{% for episode in episodes %}
+  {% if loop.first %}
+  <pre><code>
+  {{episode|dump}}</code></pre>
+  {{episode.title}} {{episode.enclosure.url}} {{episode.title | slugify}} / {{episode.itunes.duration }} /  {{episode.isoDate | formatDate}}
+  {% endif %}
+  
+{% endfor %}
 
 {% set postslist = collections.posts | head(-3) %}
 {% set postslistCounter = collections.posts | length %}
 {% include "postslist.njk" %}
 
-<p>More posts can be found in <a href="{{ '/posts/' | url }}">the archive</a>.</p>
+<p>More posts can be found in <a href="{{ '/posts/' | url }}">the archive</a>.</pre>

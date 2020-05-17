@@ -16,12 +16,12 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addLayoutAlias("post", "layouts/post.njk");
 
   eleventyConfig.addFilter("readableDate", dateObj => {
-    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("dd LLL yyyy");
+    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("dd mmm yyyy");
   });
 
   // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
   eleventyConfig.addFilter('htmlDateString', (dateObj) => {
-    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat('yyyy-LL-dd');
+    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat('dd/mm/YYYY');
   });
 
   // Get the first `n` elements of a collection.
@@ -32,6 +32,11 @@ module.exports = function(eleventyConfig) {
 
     return array.slice(0, n);
   });
+
+  eleventyConfig.addFilter("slice", require("./filters/slice.js"));
+  eleventyConfig.addFilter("slugify", require("./filters/slugify.js"));
+  eleventyConfig.addFilter("formatDate", require("./filters/formatDate.js"));
+  eleventyConfig.addFilter("formatDuration", require("./filters/formatDuration.js"));
 
   eleventyConfig.addCollection("tagList", require("./_11ty/getTagList"));
 

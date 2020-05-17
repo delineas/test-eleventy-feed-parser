@@ -1,0 +1,11 @@
+---
+pagination:
+  data: episodes
+  size: 1
+  alias: episode
+permalink: "episodios/{{ episode.title | slugify}}/"
+title: {{ episode.title }}
+---
+<p> Name: {{ episode.title }} </p>
+<p> URL: {{ episode.enclosure.url }} </p>
+<audio src="{{ episode.enclosure.url }}" preload="metadata" controls>
